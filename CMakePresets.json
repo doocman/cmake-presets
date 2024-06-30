@@ -1,0 +1,151 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 22,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "msvc-warnings",
+      "hidden": true,
+      "cacheVariables": {
+        "PRESET_WARNINGS": "/W4;/w14242;/w14254;/w14263;/w14265;/w14287;/we4289;/w14296;/w14311;/w14545;/w14546;/w14547;/w14549;/w14555;/w14619;/w14640;/w14826;/w14905;/w14906;/w14928;/permissive-;/wd4265"
+      }
+    },
+    {
+      "name": "clang-warnings",
+      "hidden": true,
+      "cacheVariables": {
+        "PRESET_WARNINGS": "-Wall;-Wextra;-Wpedantic;-Wno-unknown-attributes;-ftemplate-backtrace-limit=0"
+      }
+    },
+    {
+      "name": "gcc-warnings",
+      "hidden": true,
+      "cacheVariables": {
+        "PRESET_WARNINGS": "-Wall;-Wextra;-Wpedantic"
+      }
+    },
+    {
+      "name": "msvc-base",
+      "hidden": true,
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "inherits": [ "msvc-warnings" ],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "cl",
+        "CMAKE_C_COMPILER": "cl"
+      },
+      "generator": "Ninja"
+    },
+    {
+      "name": "clang-base",
+      "hidden": true,
+      "inherits": [ "clang-warnings" ],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_C_COMPILER": "clang"
+      },
+      "generator": "Ninja"
+    },
+    {
+      "name": "gcc-base",
+      "hidden": true,
+      "inherits": [ "gcc-warnings" ],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "g++",
+        "CMAKE_C_COMPILER": "gcc"
+      },
+      "generator": "Ninja"
+    },
+    {
+      "name": "crosscompile-base",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      },
+      "generator": "Ninja"
+    },
+    {
+      "name": "msvc22-debug",
+      "binaryDir": "${sourceDir}/build/msvc22-debug",
+      "inherits": [
+        "msvc-base"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "installDir": "${sourceDir}/install/msvc22-debug"
+    },
+    {
+      "name": "msvc22-reldeb",
+      "binaryDir": "${sourceDir}/build/msvc22-relwithdebinfo",
+      "inherits": [
+        "msvc-base"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      },
+      "installDir": "${sourceDir}/install/msvc22-relwithdebinfo"
+    },
+    {
+      "name": "clang-release",
+      "inherits": [
+        "clang-base"
+      ],
+      "binaryDir": "${sourceDir}/build/clang-release",
+      "installDir": "${sourceDir}/install/clang-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "clang-reldeb",
+      "inherits": [
+        "clang-base"
+      ],
+      "binaryDir": "${sourceDir}/build/clang-reldeb",
+      "installDir": "${sourceDir}/install/clang-reldeb",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "clang-debug",
+      "inherits": [
+        "clang-base"
+      ],
+      "binaryDir": "${sourceDir}/build/clang-debug",
+      "installDir": "${sourceDir}/install/clang-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "gcc-release",
+      "inherits": [
+        "gcc-base"
+      ],
+      "binaryDir": "${sourceDir}/build/gcc-release",
+      "installDir": "${sourceDir}/install/gcc-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "gcc-debug",
+      "inherits": [
+        "gcc-base"
+      ],
+      "binaryDir": "${sourceDir}/build/gcc-release",
+      "installDir": "${sourceDir}/install/gcc-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ]
+}
