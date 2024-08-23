@@ -141,8 +141,8 @@
       "inherits": [
         "gcc-base"
       ],
-      "binaryDir": "${sourceDir}/build/gcc-release",
-      "installDir": "${sourceDir}/install/gcc-release",
+      "binaryDir": "${sourceDir}/build/gcc-debug",
+      "installDir": "${sourceDir}/install/gcc-debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
       }
